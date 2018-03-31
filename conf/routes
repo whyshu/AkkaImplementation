@@ -1,0 +1,3 @@
+GET     /                           controllers.HomeController.index
+GET     /ws                         controllers.HomeController.ws
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
