@@ -3,6 +3,8 @@ import java.util.concurrent.TimeUnit;
 import scala.concurrent.duration.Duration;
 import akka.actor.AbstractActorWithTimers;
 import akka.actor.*;
+import akka.actor.AbstractActor.Receive;
+
 import java.util.*;
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -14,16 +16,18 @@ public class TimeActor extends AbstractActorWithTimers {
     private final class Tick {
     	public Tick(){
     		System.out.println("=================Inside Tick"+LocalDateTime.now().toString());
-	    	UserActor.TimeMessage tMsg = new UserActor.TimeMessage(LocalDateTime.now().toString());
-	        userActors.forEach(ar -> ar.tell(tMsg, self()));
-    	}
+	    	}
     	
     	
     }
     
     
     public String notifyClients(){
-    	return "check";
+    	
+    	UserActor.TimeMessage tMsg = new UserActor.TimeMessage("Simar");
+        userActors.forEach(ar -> ar.tell(tMsg, self()));
+
+    	return tMsg.time;
     }
     
     @Override
