@@ -3,7 +3,9 @@ import java.util.concurrent.TimeUnit;
 import scala.concurrent.duration.Duration;
 import akka.actor.AbstractActorWithTimers;
 import akka.actor.*;
+import Models.Tweet;
 import akka.actor.AbstractActor.Receive;
+import services.*;
 
 import java.util.*;
 import javax.inject.Inject;
@@ -17,14 +19,12 @@ public class TimeActor extends AbstractActorWithTimers {
     	public Tick(){
     		System.out.println("=================Inside Tick"+LocalDateTime.now().toString());
 	    	}
-    	
-    	
     }
-    
-    
+
+
+
     public String notifyClients(){
-    	
-    	UserActor.TimeMessage tMsg = new UserActor.TimeMessage("Simar");
+    	UserActor.TimeMessage tMsg = new UserActor.TimeMessage(new TwitterApi().getTweets("BJP"));
         userActors.forEach(ar -> ar.tell(tMsg, self()));
 
     	return tMsg.time;

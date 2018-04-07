@@ -33,12 +33,12 @@ public final class UserActor extends AbstractActor {
         public final String time;
         public TimeMessage(String time) {
             this.time = time;
-        	System.out.println("===========In Time message :: "+time);
+        	//System.out.println("===========In Time message :: "+time);
         }       
     }
     
     public void sendTime(TimeMessage msg) {
-        System.out.println("=================Sending response time :: "+msg.time);
+        //System.out.println("=================Sending response time :: "+msg.time);
         final ObjectNode response = Json.newObject();
         response.put("time", msg.time);
         ws.tell(response, self());
