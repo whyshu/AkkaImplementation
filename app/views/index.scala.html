@@ -5,10 +5,12 @@
 <head>
     <title>WebSocket Test</title>
     <script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'></script>;
-    <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>  
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
 </head>
 <body data-ws-url="@routes.HomeController.ws.webSocketURL(request)">
-    <h1>Hello, WebSocket!</h1>    
+    <h1>Search your keyword!</h1>
+    <input type="text" class="form-control" id="search_box"/>
+    <button type="button" id="search_button" class="btn btn-info btn-primary btn-lg" value="Submit Button">SEARCH</button>
     <div id="time"> </div>
 </body>
 </html>
