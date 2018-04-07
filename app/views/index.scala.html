@@ -10,8 +10,10 @@
 <body data-ws-url="@routes.HomeController.ws.webSocketURL(request)">
     <h1>Search your keyword!</h1>
     <div>
-    <input type="text" class="form-control" id="search_box"/>
-    <button type="button" id="search_button" value="Submit Button">SEARCH</button>
+        <form id="addsymbolform" class="navbar-form pull-right">
+            <input id="addsymboltext" type="text" class="span2" placeholder="SYMBOL">
+            <button type="submit" class="btn">Search</button>
+        </form>
     </div>
     <div id="time"> </div>
 </body>

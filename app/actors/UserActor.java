@@ -26,7 +26,7 @@ public final class UserActor extends AbstractActor {
     @Override
     public Receive createReceive() {
     	System.out.println("===========In user actor");
-        return receiveBuilder().match(TimeMessage.class, this::sendTime).build();
+        return receiveBuilder().matchAny(s->System.out.println("hello "+s)).match(TimeMessage.class, this::sendTime).build();
     }
     
     static public class TimeMessage {

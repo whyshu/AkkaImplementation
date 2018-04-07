@@ -33,7 +33,7 @@ public class TimeActor extends AbstractActorWithTimers {
     @Override
     public void preStart() {
     	System.out.println("=====================Inside Time actor prestart");
-        getTimers().startPeriodicTimer("Timer", new Tick(), Duration.create(5, TimeUnit.SECONDS));
+        //getTimers().startPeriodicTimer("Timer", new Tick(), Duration.create(5, TimeUnit.SECONDS));
     }
     
     @Override
