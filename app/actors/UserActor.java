@@ -1,7 +1,9 @@
 package actors;
 import akka.actor.*;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.libs.Json;
+import services.TwitterApi;
 
 
 public final class UserActor extends AbstractActor {
@@ -26,8 +28,20 @@ public final class UserActor extends AbstractActor {
     @Override
     public Receive createReceive() {
     	System.out.println("===========In user actor");
-        return receiveBuilder().matchAny(s->System.out.println("hello "+s)).match(TimeMessage.class, this::sendTime).build();
+        return receiveBuilder().matchAny(s->callGetTweets(s)).build();
     }
+    
+    TwitterApi twitterApi = new TwitterApi();
+    
+    public void callGetTweets(Object s){
+    	JsonNode input = Json.newObject();   	
+    	input = (JsonNode)s;
+    	String keyword = input.get("symbol").asText();
+    	System.out.println("Obtained keyword :: "+keyword);    	
+    	TimeMessage timeMessage = new TimeMessage(twitterApi.getTweets(keyword));
+    	sendTime(timeMessage);
+    }
+    
     
     static public class TimeMessage {
         public final String time;
@@ -43,5 +57,4 @@ public final class UserActor extends AbstractActor {
         response.put("time", msg.time);
         ws.tell(response, self());
     }
-   
 }
